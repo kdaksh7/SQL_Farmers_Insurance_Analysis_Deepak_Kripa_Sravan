@@ -1,1 +1,1 @@
-# farmersinsurance-mysql
+# Farmers Insurance - MySQL Case Study
