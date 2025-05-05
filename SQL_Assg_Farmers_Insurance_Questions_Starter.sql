@@ -10,7 +10,11 @@ use ndap;
 -- 	[2 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
--- <write your answers in the empty spaces given, the length of solution queries (and the solution writing space) can vary>
+-- -- Q1: Display the total number of farmers covered in each state.
+SELECT srcStateName, SUM(TotalFarmersCovered) AS total_farmers
+FROM farmersinsurancedata
+GROUP BY srcStateName;
+
 
 
 ###
@@ -21,6 +25,13 @@ use ndap;
 -- 	[3 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT srcStateName,
+       SUM(TotalFarmersCovered) AS total_farmers,
+       SUM(SumInsured) AS total_sum_insured
+FROM farmersinsurancedata
+GROUP BY srcStateName
+ORDER BY total_farmers DESC;
+
 
 
 -- ###
@@ -224,6 +235,13 @@ use ndap;
 -- 	[2 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT srcDistrictName, TotalFarmersCovered
+FROM farmersinsurancedata
+WHERE TotalFarmersCovered > (
+    SELECT AVG(TotalFarmersCovered)
+    FROM farmersinsurancedata
+);
+
 
 
 
