@@ -253,6 +253,16 @@ WHERE TotalFarmersCovered > (
 -- 	[3 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT DISTINCT srcStateName
+FROM farmersinsurancedata
+WHERE SumInsured > (
+    SELECT SumInsured
+    FROM farmersinsurancedata
+    ORDER BY FarmersPremiumAmount DESC
+    LIMIT 1
+);
+
+
 
 
 
@@ -264,6 +274,19 @@ WHERE TotalFarmersCovered > (
 -- 	[5 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT srcDistrictName
+FROM farmersinsurancedata
+WHERE FarmersPremiumAmount > (
+    SELECT AVG(FarmersPremiumAmount)
+    FROM farmersinsurancedata
+    WHERE srcStateName = (
+        SELECT srcStateName
+        FROM farmersinsurancedata
+        ORDER BY TotalPopulation DESC
+        LIMIT 1
+    )
+);
+
 
 
 
@@ -280,6 +303,14 @@ WHERE TotalFarmersCovered > (
 -- 	[3 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT 
+    ROW_NUMBER() OVER (ORDER BY TotalFarmersCovered DESC) AS row_num,
+    srcStateName,
+    srcDistrictName,
+    TotalFarmersCovered,
+    SumInsured
+FROM farmersinsurancedata;
+
 
 
 
@@ -291,6 +322,16 @@ WHERE TotalFarmersCovered > (
 -- 	[3 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT 
+    srcStateName,
+    srcDistrictName,
+    SumInsured,
+    RANK() OVER (
+        PARTITION BY srcStateName
+        ORDER BY SumInsured DESC
+    ) AS district_rank
+FROM farmersinsurancedata
+ORDER BY srcStateName ASC, district_rank;
 
 
 
@@ -301,6 +342,17 @@ WHERE TotalFarmersCovered > (
 -- 	[4 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT 
+    srcStateName,
+    srcDistrictName,
+    srcYear,
+    FarmersPremiumAmount,
+    SUM(FarmersPremiumAmount) OVER (
+        PARTITION BY srcStateName, srcDistrictName
+        ORDER BY srcYear ASC
+    ) AS cumulative_premium
+FROM farmersinsurancedata
+ORDER BY srcStateName, srcDistrictName, srcYear;
 
 
 
