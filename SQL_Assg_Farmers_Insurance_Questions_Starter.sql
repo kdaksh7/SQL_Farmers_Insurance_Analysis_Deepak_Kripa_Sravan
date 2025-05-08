@@ -45,6 +45,9 @@ ORDER BY total_farmers DESC;
 -- 	[2 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT *
+FROM farmersinsurancedata
+WHERE srcYear = 2020;
 
 
 -- ###
@@ -54,6 +57,10 @@ ORDER BY total_farmers DESC;
 -- 	[3 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT *
+FROM farmersinsurancedata
+WHERE TotalPopulationRural > 1000000
+  AND srcStateName = 'HIMACHAL PRADESH';
 
 
 -- ###
@@ -64,7 +71,14 @@ ORDER BY total_farmers DESC;
 -- 	[5 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
-
+SELECT 
+    srcStateName, 
+    srcDistrictName, 
+    SUM(FarmersPremiumAmount) AS total_farmers_premium
+FROM farmersinsurancedata
+WHERE srcYear = 2018
+GROUP BY srcStateName, srcDistrictName
+ORDER BY total_farmers_premium ASC;
 
 -- ###
 
@@ -74,6 +88,14 @@ ORDER BY total_farmers DESC;
 -- 	[5 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT 
+    srcStateName,
+    SUM(TotalFarmersCovered) AS total_farmers_covered,
+    SUM(GrossPremiumAmountToBePaid) AS total_gross_premium
+FROM farmersinsurancedata
+WHERE nsuredLandArea > 5.0
+  AND srcYear = 2018
+GROUP BY srcStateName;
 
 
 	  
@@ -88,6 +110,13 @@ ORDER BY total_farmers DESC;
 -- 	[3 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT 
+    srcYear,
+    AVG(nsuredLandArea) AS avg_insured_land_area
+FROM farmersinsurancedata
+GROUP BY srcYear
+ORDER BY avg_insured_land_area ASC;
+
 
 
 
@@ -98,6 +127,15 @@ ORDER BY total_farmers DESC;
 -- 	[3 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT 
+    srcDistrictName,
+    SUM(TotalFarmersCovered) AS total_farmers_covered
+FROM farmersinsurancedata
+WHERE CAST(InsuranceUnits AS DECIMAL) > 0
+  AND TotalFarmersCovered > 0
+GROUP BY srcDistrictName
+ORDER BY total_farmers_covered ASC;
+
 
 
 
@@ -109,6 +147,16 @@ ORDER BY total_farmers DESC;
 -- 	[4 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT 
+    srcStateName,
+    SUM(FarmersPremiumAmount) AS total_farmers_premium,
+    SUM(StatePremiumAmount) AS total_state_premium,
+    SUM(GOVPremiumAmount) AS total_gov_premium,
+    SUM(TotalFarmersCovered) AS total_farmers_covered
+FROM farmersinsurancedata
+WHERE SumInsured > 500000
+GROUP BY srcStateName;
+
 
 
 
