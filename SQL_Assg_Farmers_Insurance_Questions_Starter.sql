@@ -11,7 +11,7 @@ use ndap;
 -- ###
 -- TYPE YOUR CODE BELOW >
 -- -- Q1: Display the total number of farmers covered in each state.
-SELECT srcStateName, SUM(TotalFarmersCovered) AS total_farmers
+SELECT srcStateName, SUM(TotalFarmersCovered) AS total_farmers_covered
 FROM farmersinsurancedata
 GROUP BY srcStateName;
 
@@ -26,11 +26,11 @@ GROUP BY srcStateName;
 -- ###
 -- TYPE YOUR CODE BELOW >
 SELECT srcStateName,
-       SUM(TotalFarmersCovered) AS total_farmers,
+       SUM(TotalFarmersCovered) AS total_farmers_covered,
        SUM(SumInsured) AS total_sum_insured
 FROM farmersinsurancedata
 GROUP BY srcStateName
-ORDER BY total_farmers DESC;
+ORDER BY total_farmers_covered DESC;
 
 
 
