@@ -10,7 +10,7 @@ The project was executed collaboratively by three team members — **Deepak**, *
 ### 🎯 Key Deliverables:
 - ✅ SQL case study covering filtering, aggregation, joins, subqueries, and window functions
 - ✅ A normalized relational schema with foreign key enforcement
-- ✅ Entity-Relationship (ER) diagram visualized using dbdiagram.io
+- ✅ Entity-Relationship (ER) diagram.
 - ✅ GitHub collaboration with individual development branches
 - ✅ Final report and code submission aligned with academic standards
 
