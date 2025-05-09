@@ -172,6 +172,11 @@ GROUP BY srcStateName;
 -- 	[2 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT srcDistrictName, TotalPopulation
+FROM FarmersInsuranceData
+WHERE srcYear = 2020
+ORDER BY TotalPopulation DESC
+LIMIT 5;
 
 
 
@@ -184,6 +189,11 @@ GROUP BY srcStateName;
 -- 	[3 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT srcStateName, srcDistrictName, SumInsured, FarmersPremiumAmount
+FROM FarmersInsuranceData
+WHERE FarmersPremiumAmount > 0
+ORDER BY SumInsured DESC, FarmersPremiumAmount ASC
+LIMIT 10;
 
 
 
@@ -195,6 +205,17 @@ GROUP BY srcStateName;
 -- 	[5 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT 
+    srcStateName,
+    srcYear,
+    SUM(TotalFarmersCovered) AS TotalFarmersCovered,
+    SUM(TotalPopulation) AS TotalPopulation,
+    CAST(SUM(TotalFarmersCovered) AS FLOAT) / NULLIF(SUM(TotalPopulation), 0) AS CoverageRatio
+FROM FarmersInsuranceData
+GROUP BY srcStateName, srcYear
+HAVING SUM(TotalPopulation) > 0
+ORDER BY CoverageRatio DESC
+LIMIT 3;
 
 
 
@@ -210,6 +231,10 @@ GROUP BY srcStateName;
 -- 	[2 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT DISTINCT 
+    srcStateName,
+    LEFT(srcStateName, 3) AS StateShortName
+FROM FarmersInsuranceData;
 
 
 
@@ -220,6 +245,9 @@ GROUP BY srcStateName;
 -- 	[2 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT srcDistrictName
+FROM FarmersInsuranceData
+WHERE srcDistrictName LIKE 'B%';
 
 
 
@@ -230,6 +258,9 @@ GROUP BY srcStateName;
 -- 	[2 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT srcStateName, srcDistrictName
+FROM FarmersInsuranceData
+WHERE srcDistrictName LIKE '%pur';
 
 
 -- ###
@@ -244,6 +275,11 @@ GROUP BY srcStateName;
 -- 	[4 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT srcStateName, srcDistrictName, SUM(FarmersPremiumAmount) AS TotalFarmersPremium
+FROM FarmersInsuranceData
+WHERE InsuranceUnits > 10
+GROUP BY srcStateName, srcDistrictName
+ORDER BY TotalFarmersPremium ASC;
 
 
 
@@ -255,6 +291,22 @@ GROUP BY srcStateName;
 -- 	[5 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT 
+    srcStateName,
+    srcDistrictName,
+    srcYear,
+    TotalPopulation,
+    MaxFarmersPremium
+FROM (
+    SELECT 
+        srcStateName,
+        srcDistrictName,
+        srcYear,
+        TotalPopulation,
+        MAX(FarmersPremiumAmount) OVER (PARTITION BY srcStateName, srcDistrictName) AS MaxFarmersPremium
+    FROM FarmersInsuranceData
+) AS subquery
+WHERE MaxFarmersPremium > 200000000;
 
 
 
@@ -267,6 +319,19 @@ GROUP BY srcStateName;
 -- 	[5 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+SELECT 
+    t.srcStateName,
+    t.srcDistrictName,
+    SUM(t.FarmersPremiumAmount) AS TotalPremiumAmount,
+    AVG(t.TotalPopulation) AS AvgPopulation
+FROM 
+    FarmersInsuranceData AS t
+GROUP BY 
+    t.srcStateName, t.srcDistrictName
+HAVING 
+    SUM(t.FarmersPremiumAmount) > 10000  
+ORDER BY 
+    TotalPremiumAmount DESC;
 
 
 
