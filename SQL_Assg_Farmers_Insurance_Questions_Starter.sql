@@ -418,6 +418,16 @@ ORDER BY srcStateName, srcDistrictName, srcYear;
 -- 	[2 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+CREATE TABLE states (
+    StateCode INT PRIMARY KEY,
+    StateName VARCHAR(100) NOT NULL
+);
+CREATE TABLE districts (
+    DistrictCode INT PRIMARY KEY,
+    DistrictName VARCHAR(100) NOT NULL,
+    StateCode INT,
+    FOREIGN KEY (StateCode) REFERENCES states(StateCode)
+);
 
 
 
@@ -429,6 +439,10 @@ ORDER BY srcStateName, srcDistrictName, srcYear;
 -- 	[2 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+ALTER TABLE districts
+ADD CONSTRAINT fk_statecode
+FOREIGN KEY (StateCode)
+REFERENCES states(StateCode);
 
 
 
@@ -445,6 +459,9 @@ ORDER BY srcStateName, srcDistrictName, srcYear;
 -- 	[2 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+UPDATE farmersinsurancedata
+SET FarmersPremiumAmount = 500.0
+WHERE rowID = 1;
 
 
 
@@ -456,6 +473,10 @@ ORDER BY srcStateName, srcDistrictName, srcYear;
 -- 	[2 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+UPDATE farmersinsurancedata
+SET srcYear = 2021
+WHERE srcStateName = 'HIMACHAL PRADESH';
+
 
 
 
@@ -466,6 +487,9 @@ ORDER BY srcStateName, srcDistrictName, srcYear;
 -- 	[2 Marks]
 -- ###
 -- TYPE YOUR CODE BELOW >
+DELETE FROM farmersinsurancedata
+WHERE TotalFarmersCovered < 10000
+  AND srcYear = 2020;
 
 
 
