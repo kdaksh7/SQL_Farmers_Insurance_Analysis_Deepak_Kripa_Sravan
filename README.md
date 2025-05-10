@@ -21,3 +21,10 @@ The project was executed collaboratively by three team members — **Deepak**, *
 - Identification of underperforming or low-insured regions
 
 This project not only demonstrated strong technical SQL capabilities, but also showcased the team's ability to collaborate effectively, work with real-world data, and derive actionable insights for data-driven decision making in the agri-insurance domain.
+
+**Conclusion**
+The Farmers Insurance MySQL Case Study provided a comprehensive platform to apply structured query language (SQL) to a real-world dataset representing India's agricultural insurance sector. Through a well-organized relational schema and strategically crafted SQL queries, we uncovered meaningful insights into state-wise and district-level insurance patterns, premium contributions, and population demographics.
+
+This project not only reinforced fundamental SQL skills such as filtering, aggregation, and joins, but also challenged the team with advanced concepts including subqueries, window functions, and data normalization techniques. Our findings highlighted disparities in insurance coverage, revealed high-risk or underinsured regions, and traced financial trends across different years and stakeholders.
+
+Collaborating as a team of three — Deepak, Kripa, and Sravan — we ensured code quality, shared learning, and effective division of tasks. The finalised ER diagram, normalised schema, and robust query library reflect both technical rigor and real-world relevance. Overall, this case study stands as a strong demonstration of how data can drive smarter decision-making in critical domains like agriculture and public insurance policy.
